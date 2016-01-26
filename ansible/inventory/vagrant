@@ -1,0 +1,9 @@
+master-0 ip=10.100.199.200 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2222 ansible_ssh_private_key_file=/home/etienne/dev/projects/examples/swarm/.vagrant/machines/master-0/virtualbox/private_key
+master-1 ip=10.100.199.201 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2200 ansible_ssh_private_key_file=/home/etienne/dev/projects/examples/swarm/.vagrant/machines/master-1/virtualbox/private_key
+master-2 ip=10.100.199.202 ansible_ssh_host=127.0.0.1 ansible_ssh_port=2201 ansible_ssh_private_key_file=/home/etienne/dev/projects/examples/swarm/.vagrant/machines/master-2/virtualbox/private_key
+
+[master]
+master-0
+master-1
+master-2
+

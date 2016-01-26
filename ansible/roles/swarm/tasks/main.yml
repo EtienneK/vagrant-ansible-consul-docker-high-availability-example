@@ -1,0 +1,10 @@
+- name: Docker service is started
+  service:
+    name=docker
+    state=started
+
+- name: Swarm master is running
+  docker:
+    name: swarm-master
+    image: swarm
+    command: manage --addr={{ip}} --replication consul://{{ ip }}:8500/swarm

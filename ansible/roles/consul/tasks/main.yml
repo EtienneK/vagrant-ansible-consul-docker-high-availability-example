@@ -1,0 +1,34 @@
+- name: User is present
+  user:
+    name: consul
+    createhome: no
+
+- name: Directories are present
+  file:
+    dest: "{{ item }}"
+    state: directory
+  with_items: consul.directories
+
+- name: Consul user has access to its data
+  file:
+    dest: "/var/consul"
+    owner: "consul"
+    group: "consul"
+
+- name: Files are present
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items: consul.files
+  
+- name: Templates are present
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items: consul.templates
+  
+- name: Service is enabled and started
+  service: name=consul-server.service state=started enabled=true
+  

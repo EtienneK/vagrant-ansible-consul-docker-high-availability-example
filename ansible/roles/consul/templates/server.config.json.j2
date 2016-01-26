@@ -1,0 +1,18 @@
+{
+    "bind_addr": "{{ ip }}",
+    "client_addr": "0.0.0.0",
+    "bootstrap_expect": {{groups['master'] | length}},
+    "server": true,
+    "datacenter": "default",
+    "data_dir": "/var/consul",
+    "encrypt": "{{ consul.encrypt_key }}",
+    "log_level": "INFO",
+    "enable_syslog": true,
+    "retry_join": {% set ip_arr = [] %}
+{% for host in groups['master'] %}
+{% if hostvars[host]['ip'] != ip %}
+{% if ip_arr.append(hostvars[host]['ip']) %}{% endif %}
+{% endif %}
+{% endfor %}
+{{ ip_arr | to_json }}
+}

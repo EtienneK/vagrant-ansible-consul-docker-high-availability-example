@@ -1,0 +1,16 @@
+[Unit]
+Description=consul agent server
+Requires=network-online.target
+After=network-online.target
+
+[Service]
+User=consul
+Group=consul
+Environment=GOMAXPROCS=2
+Restart=on-failure
+ExecStart=/usr/local/bin/consul agent -config-dir /etc/consul.d/server
+ExecReload=/bin/kill -HUP $MAINPID
+KillSignal=SIGINT
+
+[Install]
+WantedBy=multi-user.target

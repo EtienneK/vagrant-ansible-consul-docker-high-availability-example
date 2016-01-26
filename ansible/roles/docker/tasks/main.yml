@@ -1,0 +1,18 @@
+---
+- name: Install Docker
+  shell: curl -sSL https://get.docker.com/ | sh
+  
+- name: Enable and Start Docker Service
+  service: name=docker enabled=yes state=started
+  
+- name: Python-pip is present
+  yum:
+    name: epel-release
+    state: present
+  yum:
+    name: python-pip
+    update_cache: true
+    state: present
+
+- name: Docker-py is present
+  pip: name=docker-py state=present

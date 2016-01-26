@@ -1,0 +1,17 @@
+consul:
+  directories:
+    - /etc/consul.d
+    - /etc/consul.d/server
+    - /etc/consul.d/client
+    - /var/consul
+
+  files: [
+    { src: "consul", dest: "/usr/local/bin/consul", mode: "0755" },
+    { src: "consul-server.service", dest: "/usr/lib/systemd/system/consul-server.service", mode: "0644" }
+  ]
+
+  templates: [
+    { src: "server.config.json.j2", dest: "/etc/consul.d/server/config.json", mode: "0644" }
+  ]
+
+  encrypt_key: "X4SYOinf2pTAcAHRhpj7dA==" 
