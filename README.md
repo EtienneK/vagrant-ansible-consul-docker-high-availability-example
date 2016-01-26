@@ -3,4 +3,4 @@ An example using Vagrant and Ansible to configure a high-availability cluster fo
 
 ## Usage
   
-  vagrant up
+    vagrant up
