@@ -1,0 +1,2 @@
+[Service]
+ExecStart=/usr/bin/docker daemon -H tcp://{{ip}}:2375 -H unix:///var/run/docker.sock --cluster-advertise {{ip}}:2375 --cluster-store consul://{{ip}}:8500/docker_host

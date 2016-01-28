@@ -1,18 +1,26 @@
 ---
+- name: Templates are present
+  template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
+  with_items: docker.templates
+
+- name: epel-release is present
+  yum:
+    name: epel-release
+    state: present
+
+- name: python-pip is present
+  yum:
+    name: python-pip
+    state: present
+
+- name: Docker-py is present
+  pip: name=docker-py state=present
+
 - name: Install Docker
   shell: curl -sSL https://get.docker.com/ | sh
   
 - name: Enable and Start Docker Service
   service: name=docker enabled=yes state=started
-  
-- name: Python-pip is present
-  yum:
-    name: epel-release
-    state: present
-  yum:
-    name: python-pip
-    update_cache: true
-    state: present
-
-- name: Docker-py is present
-  pip: name=docker-py state=present
