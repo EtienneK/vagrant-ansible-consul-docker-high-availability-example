@@ -1,8 +1,7 @@
 {
     "bind_addr": "{{ ip }}",
     "client_addr": "0.0.0.0",
-    "bootstrap_expect": {{groups['server'] | length}},
-    "server": true,
+    "server": false,
     "datacenter": "default",
     "data_dir": "/var/consul",
     "encrypt": "{{ consul.encrypt_key }}",

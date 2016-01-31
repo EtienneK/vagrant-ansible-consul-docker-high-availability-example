@@ -11,3 +11,13 @@
     ports: 4000:4000
     docker_api_version: 1.18
     command: manage -H tcp://0.0.0.0:4000 --addr={{ip}}:4000 --replication consul://{{ ip }}:8500/docker_swarm
+    restart_policy: always
+  when: "'server' in group_names"
+  
+- name: Swarm node is running
+  docker:
+    name: swarm-node
+    image: swarm
+    docker_api_version: 1.18
+    command: join --addr={{ ip }}:2375 consul://{{ ip }}:8500/docker_swarm
+    restart_policy: always

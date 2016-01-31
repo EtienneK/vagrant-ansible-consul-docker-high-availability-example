@@ -28,7 +28,13 @@
     dest: "{{ item.dest }}"
     mode: "{{ item.mode }}"
   with_items: consul.templates
+  register: consul_templates
   
-- name: Service is enabled and started
-  service: name=consul-server.service state=started enabled=true
+- name: Server service is enabled and started
+  service: name=consul-server.service state=restarted enabled=true
+  when: "(consul_templates.changed) and 'server' in group_names"
+ 
+- name: Client service is enabled and started
+  service: name=consul-client.service state=restarted enabled=true
+  when: "(consul_templates.changed) and 'client' in group_names"
   

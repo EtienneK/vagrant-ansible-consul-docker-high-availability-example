@@ -1,4 +1,10 @@
 ---
+- name: Directories are present
+  file:
+    dest: "{{ item }}"
+    state: directory
+  with_items: docker.directories
+  
 - name: Templates are present
   template:
     src: "{{ item.src }}"
